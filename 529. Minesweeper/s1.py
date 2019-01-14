@@ -1,7 +1,3 @@
-"""
-
-"""
-
 #Leetcode 529 - Mine Sweeper
 #https://leetcode.com/problems/minesweeper/
 
@@ -29,7 +25,6 @@ class Solution:
 
         for r in [row-1,row,row+1]:
             for c in [col-1,col,col+1]:
-                #print("counting...",r,c)
                 if (self.isValidAddr(board, r,c)):
                     if board[r][c] == 'M':
                         count+=1
@@ -37,16 +32,8 @@ class Solution:
         return str(count)
 
 #************************************************************    
-    #update answer w.r.t selected cell, update nothing if invalid cell (out of boundary) selected
+    #update answer w.r.t selected cell
     def updateAnswer(self, ans, click):
-        """
-        :type ans: List[List[str]]
-        :type click: List[int]
-        :rtype: List[List[str]]
-        """
-        #init
-        if len(ans)==0:
-            ans = board
 
         row = click[0]
         col = click[1]
@@ -65,12 +52,14 @@ class Solution:
         #case 3: if the selected cell is 'E', count the no. of mines around the selected cell, reveal surrounding cells if count = 0
         if ans[row][col] == 'E':
             ans[row][col] = self.countMine(ans, (row,col))
+
             if (ans[row][col]=='0'):
                 ans[row][col]='B'
                 for r in [row-1,row,row+1]:
                     for c in [col-1,col,col+1]:
                         if self.isValidAddr(ans, r,c):
                             self.updateBoard(ans, (r,c))
+                            
             return ans
 
         #default: exception
