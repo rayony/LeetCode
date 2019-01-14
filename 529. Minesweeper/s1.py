@@ -1,174 +1,74 @@
-"""
-input
-[["E","E","E","E","E"],
-["3","E","M","E","E"],
-["2","E","E","E","E"],
-["1","E","E","E","E"]]
-[3,0]
-
-stdout
-history:  [(3, 0)]
-history:  [(3, 0), (2, 0)]
-history:  [(3, 0), (2, 0), (1, 0)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4), (2, 3)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4), (2, 3), (3, 3)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4), (2, 3), (3, 3), (3, 4)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4), (2, 3), (3, 3), (3, 4), (2, 3)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4), (2, 3), (3, 3), (3, 4), (2, 3), (2, 4)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4), (2, 3), (3, 3), (3, 4), (2, 3), (2, 4), (3, 3)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4), (2, 3), (3, 3), (3, 4), (2, 3), (2, 4), (3, 3), (3, 2)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4), (2, 3), (3, 3), (3, 4), (2, 3), (2, 4), (3, 3), (3, 2), (3, 4)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4), (2, 3), (3, 3), (3, 4), (2, 3), (2, 4), (3, 3), (3, 2), (3, 4), (2, 1)]
-history:  [(3, 0), (2, 0), (1, 0), (1, 1), (2, 0), (2, 1), (1, 1), (2, 1), (3, 0), (3, 1), (2, 1), (2, 2), (3, 2), (2, 1), (2, 2), (2, 3), (3, 1), (3, 3), (2, 2), (2, 3), (2, 4), (1, 3), (1, 4), (1, 3), (2, 3), (2, 4), (2, 3), (3, 3), (3, 4), (2, 3), (2, 4), (3, 3), (3, 2), (3, 4), (2, 1), (3, 1)]
-
-Output
-[["E","E","E","E","E"],["B","1","M","1","B"],["B","1","1","1","B"],["B","B","B","B","B"]]
-
-Expected
-[["B","1","E","1","B"],["B","1","M","1","B"],["B","1","1","1","B"],["B","B","B","B","B"]]
-
-"""
-
 #Leetcode 529 - Mine Sweeper
 #https://leetcode.com/problems/minesweeper/
 
 class Solution:
 
-    history=[]
+    isVisited = {}
 
 #************************************************************
-    def countMine(self, board, click):
-        #count and return the no. of adjacent mines in the selected cell
-        """
-        :type board: List[List[str]]
-        :type click: List[int]
-        :rtype: integer
-        """
+    #check if selected cell board[r][c] is within boundary
+    def isValidAddr(self,board,r,c):
 
-        max_row = len(board)
-        max_col = len(board[0])
+        if 0<=r<len(board) and 0<=c<len(board[0]):
+            return True
+        else:
+            return False
+
+#************************************************************
+    #count and return the no. of adjacent mines in the selected cell
+    def countMine(self, board, click):
+        
         row = click[0]
         col = click[1]
 
         count = 0
 
-        if (row-1 > 0) and (col-1>0):
-            if board[row-1][col-1] == 'M': count+=1
-        if (row-1 > 0):
-            if board[row-1][col] == 'M': count+=1
-        if (row-1 > 0) and (col+1<max_col):
-            if board[row-1][col+1] == 'M': count+=1
+        for r in [row-1,row,row+1]:
+            for c in [col-1,col,col+1]:
+                if (self.isValidAddr(board, r,c)):
+                    if board[r][c] == 'M':
+                        count+=1
 
-        if (col-1>0):
-            if board[row][col-1] == 'M': count+=1
-        if (col+1<max_col):
-            if board[row][col+1] == 'M': count+=1
-
-        if (row+1 < max_row) and (col-1>0):
-            if board[row+1][col-1] == 'M': count+=1
-        if (row+1 < max_row):
-            if board[row+1][col] == 'M': count+=1
-        if (row+1 < max_row) and (col+1<max_col):
-            if board[row+1][col+1] == 'M': count+=1
-
+        #print(row,col," =",count)
         return str(count)
 
-
 #************************************************************    
+    #update board w.r.t selected cell, update nothing if invalid cell (out of boundary) selected
     def updateBoard(self, board, click):
-        #update board w.r.t selected cell, update nothing if invalid cell (out of boundary) selected
         """
         :type board: List[List[str]]
         :type click: List[int]
         :rtype: List[List[str]]
         """
 
-        max_row = len(board)
-        max_col = len(board[0])
         row = click[0]
         col = click[1]
 
-        self.history.append((row,col))
-
-        #case 1: update nothing if selected cell is a digit 1 to 8
-        if board[row][col] in {'1','2','3','4','5','6','7','8'}:
-            print("history: ",self.history)
+        #case 1: no need update if selected cell already updated, else mark visited
+        if (row,col) in self.isVisited:
             return board
+        else:
+            self.isVisited[(row,col)]=True
+        #print(self.isVisited)
 
-        #case 2: update nothing if selected cell is blank and already revealed
-        if board[row][col] =='B':
-            print("history: ",self.history)
-            return board
-
-        #case 3: if selected cell is 'M', mark it as 'X'
+        #case 2: if the selected cell is 'M', mark it as 'X'
         if board[row][col] == 'M':
             board[row][col] = 'X'
-            print("history: ",self.history)
             return board
 
-        #case 4: if selected cell is 'E', count the no. of mines in selected cell, reveal surrounding cells if count = 0
-        if board[row][col]  == 'E':
-
+        #case 3: if the selected cell is 'E', count the no. of mines around the selected cell, reveal surrounding cells if count = 0
+        if board[row][col] == 'E':
             board[row][col] = self.countMine(board, (row,col))
-            print("history: ",self.history)
-
-
             if (board[row][col]=='0'):
                 board[row][col]='B'
-
-                if (row-1 > 0) and (col-1>0):
-                    if board[row-1][col-1] != 'M':
-                        self.updateBoard(board, (row-1,col-1))
-                if (row-1 > 0):
-                    if board[row-1][col] != 'M':
-                        self.updateBoard(board, (row-1,col))
-                if (row-1 > 0) and (col+1<max_col):
-                    if board[row-1][col+1] != 'M':
-                        self.updateBoard(board, (row-1,col+1))
-
-                if (col-1>0):
-                    if board[row][col-1] != 'M':
-                        self.updateBoard(board, (row,col-1))        
-                if (col+1<max_col):
-                    if board[row][col+1] != 'M':
-                        self.updateBoard(board, (row,col+1))
-
-                if (row+1 < max_row) and (col-1>0):
-                    if board[row+1][col-1] != 'M':
-                        self.updateBoard(board, (row+1,col-1))
-                if (row+1 < max_row):
-                    if board[row+1][col] != 'M':
-                        self.updateBoard(board, (row+1,col))
-                if (row+1 < max_row) and (col+1<max_col):
-                    if board[row+1][col+1] != 'M':
-                        self.updateBoard(board, (row+1,col+1))
+                for r in [row-1,row,row+1]:
+                    for c in [col-1,col,col+1]:
+                        #print("tmp",r,c)
+                        if self.isValidAddr(board, r,c):
+                            self.updateBoard(board, (r,c))
             return board
 
-        #case: exception
+        #default: exception
         print("Error: ",board[row][col]," at [",row,",",col,"]")
-        print("history: ",self.history)
         return board
 #************************************************************
