@@ -1,9 +1,14 @@
+"""
+
+"""
+
 #Leetcode 529 - Mine Sweeper
 #https://leetcode.com/problems/minesweeper/
 
 class Solution:
-
-    isVisited = {}
+    #ensure global variable is initialized for each test case in LeetCode.
+    def __init__(self):
+        self.isVisited = {}        
 
 #************************************************************
     #check if selected cell board[r][c] is within boundary
@@ -20,55 +25,62 @@ class Solution:
         
         row = click[0]
         col = click[1]
-
         count = 0
 
         for r in [row-1,row,row+1]:
             for c in [col-1,col,col+1]:
+                #print("counting...",r,c)
                 if (self.isValidAddr(board, r,c)):
                     if board[r][c] == 'M':
                         count+=1
 
-        #print(row,col," =",count)
         return str(count)
 
 #************************************************************    
-    #update board w.r.t selected cell, update nothing if invalid cell (out of boundary) selected
-    def updateBoard(self, board, click):
+    #update answer w.r.t selected cell, update nothing if invalid cell (out of boundary) selected
+    def updateAnswer(self, ans, click):
         """
-        :type board: List[List[str]]
+        :type ans: List[List[str]]
         :type click: List[int]
         :rtype: List[List[str]]
         """
+        #init
+        if len(ans)==0:
+            ans = board
 
         row = click[0]
         col = click[1]
 
         #case 1: no need update if selected cell already updated, else mark visited
         if (row,col) in self.isVisited:
-            return board
+            return ans
         else:
             self.isVisited[(row,col)]=True
-        #print(self.isVisited)
 
         #case 2: if the selected cell is 'M', mark it as 'X'
-        if board[row][col] == 'M':
-            board[row][col] = 'X'
-            return board
+        if ans[row][col] == 'M':
+            ans[row][col] = 'X'
+            return ans
 
         #case 3: if the selected cell is 'E', count the no. of mines around the selected cell, reveal surrounding cells if count = 0
-        if board[row][col] == 'E':
-            board[row][col] = self.countMine(board, (row,col))
-            if (board[row][col]=='0'):
-                board[row][col]='B'
+        if ans[row][col] == 'E':
+            ans[row][col] = self.countMine(ans, (row,col))
+            if (ans[row][col]=='0'):
+                ans[row][col]='B'
                 for r in [row-1,row,row+1]:
                     for c in [col-1,col,col+1]:
-                        #print("tmp",r,c)
-                        if self.isValidAddr(board, r,c):
-                            self.updateBoard(board, (r,c))
-            return board
+                        if self.isValidAddr(ans, r,c):
+                            self.updateBoard(ans, (r,c))
+            return ans
 
         #default: exception
-        print("Error: ",board[row][col]," at [",row,",",col,"]")
-        return board
+        print("Error: ",ans[row][col]," at [",row,",",col,"]")
+        return ans
+
+#************************************************************
+    #dummy function caller
+    def updateBoard(self, board, click):
+        answer = board.copy()
+        return self.updateAnswer(answer,click)
+
 #************************************************************
