@@ -1,4 +1,6 @@
 #Leetcode 529 - Mine Sweeper
+#https://leetcode.com/problems/minesweeper/
+
 class Solution:
 
 #define board = [][]
