@@ -24,9 +24,8 @@ class Solution:
         if (t2 is None):
             return t1
 
-        if t1.val>0 or t2.val>0:
-            summation=TreeNode(t1.val+t2.val)
-            summation.left = self.mergeTrees(t1.left,t2.left)
-            summation.right = self.mergeTrees(t1.right,t2.right)
+        summation=TreeNode(t1.val+t2.val)
+        summation.left = self.mergeTrees(t1.left,t2.left)
+        summation.right = self.mergeTrees(t1.right,t2.right)
 
         return summation
